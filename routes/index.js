@@ -8,7 +8,7 @@ const config = require('../config');
 router.get('/', function(req, res) {
     res.redirect('https://oauth.vk.com/authorize?client_id=' + config.clientId +
         '&redirect_uri=' + config.host +
-        'auth&scope=offline&response_type=code&v=5.92');
+        'auth&scope=messages,offline&response_type=code&v=5.92');
 });
 
 router.get('/auth', async (req, res) => {
@@ -23,6 +23,10 @@ router.post('/', async (req, res) => {
         case 'confirmation':
             res.status(200);
             res.send(config.callbackApiKey);
+            break;
+
+        case 'message_new':
+
             break;
 
         default:
