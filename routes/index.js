@@ -4,9 +4,6 @@ const util = require('util');
 const axios = require('axios');
 const config = require('../config');
 
-let access_token = '';
-let user_id = '';
-
 // Get access token
 router.get('/', function(req, res) {
     res.redirect('https://oauth.vk.com/authorize?client_id=' + config.clientId +
@@ -15,18 +12,9 @@ router.get('/', function(req, res) {
 });
 
 router.get('/auth', async (req, res) => {
-    if (req.query.code) {
-        let result = await axios.get('https://oauth.vk.com/access_token?client_id=' + config.clientId +
-            '&redirect_uri=' + config.host +
-            'auth&code=' + req.query.code + '&client_secret=' + config.clientSecret);
-
-        res.send(result.access_token);
-    } else {
-        access_token = req.params.access_token;
-        user_id = req.params.user_id;
-        console.log("Access_token: " + access_token + "\nUser_id: " + user_id);
-        res.send("Access_token: " + access_token + "\nUser_id: " + user_id);
-    }
+    res.redirect('https://oauth.vk.com/access_token?client_id=' + config.clientId +
+        '&redirect_uri=' + config.host +
+        'auth&code=' + req.query.code + '&client_secret=' + config.clientSecret);
 });
 
 // Listen to VK callback API
