@@ -19,10 +19,10 @@ router.get('/auth', (req, res) => {
             '&redirect_uri=' + config.host +
             'auth&code=' + req.query.code + '&client_secret=' + config.clientSecret);
     } else {
-        access_token = req.query.access_token;
-        user_id = req.query.user_id;
+        access_token = req.params.access_token;
+        user_id = req.params.user_id;
         console.log("Access_token: " + access_token + "\nUser_id: " + user_id);
-        res.end();
+        res.send("Access_token: " + access_token + "\nUser_id: " + user_id);
     }
 });
 
