@@ -4,12 +4,6 @@ const util = require('util');
 const axios = require('axios');
 const config = require('../config');
 
-let result = '';
-
-router.get('/', (req, res) => {
-    res.send(result);
-});
-
 // Listen to VK callback API
 router.post('/', async (req, res) => {
     switch (req.body.type) {
@@ -19,12 +13,14 @@ router.post('/', async (req, res) => {
             break;
 
         case 'message_new':
-            let message = encodeURIComponent("Здравствуйте! Ваше сообщение: '" + req.body.object.body + "'");
+            let message = encodeURIComponent("Здравствуйте! Ваше сообщение: '" + req.body.object.text + "'");
             let result = await axios.get("https://api.vk.com/method/messages.send?v=5.89&access_token=" + config.access_token +
-                "&user_id=" + req.body.object['user_id'] +
+                "&user_id=" + req.body.object['from_id'] +
                 "&message=" + message);
 
-            res.render(result);
+            console.log(result);
+            res.status(200);
+            res.send('ok');
             break;
 
         default:
