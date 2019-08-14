@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
 
 router.get('/auth', async (req, res) => {
     if (req.query.code) {
-        let result = axios.get('https://oauth.vk.com/access_token?client_id=' + config.clientId +
+        let result = await axios.get('https://oauth.vk.com/access_token?client_id=' + config.clientId +
             '&redirect_uri=' + config.host +
             'auth&code=' + req.query.code + '&client_secret=' + config.clientSecret);
 
