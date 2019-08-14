@@ -13,14 +13,14 @@ router.get('/', function(req, res) {
         'auth&scope=offline&response_type=code&v=5.92');
 });
 
-router.post('/auth', (req, res) => {
+router.get('/auth', (req, res) => {
     if (req.query.code) {
         res.redirect('https://oauth.vk.com/access_token?client_id=' + config.clientId +
             '&redirect_uri=' + config.host +
             'auth&code=' + req.query.code + '&client_secret=' + config.clientSecret);
     } else {
-        access_token = req.body.access_token;
-        user_id = req.body.user_id;
+        access_token = req.query.access_token;
+        user_id = req.query.user_id;
         console.log("Access_token: " + access_token + "\nUser_id: " + user_id);
         res.end();
     }
