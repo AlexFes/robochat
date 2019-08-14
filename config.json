@@ -1,4 +1,7 @@
 {
+  "host": "https://robochat-app.herokuapp.com/",
   "secretKey": "uch3802hr7480h3jf84932h84ob23",
-  "callbackApiKey": "0056b4a6"
+  "callbackApiKey": "0056b4a6",
+  "clientId": "6822442",
+  "clientSecret": "Ed0ohfeYMew3IO1yto6j"
 }
